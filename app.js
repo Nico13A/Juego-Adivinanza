@@ -2,6 +2,7 @@ let numeroSecreto = 0;
 let intentos = 0;
 let listaNumerosSorteados = [];
 let numeroMaximo = 10;
+let maximosIntentos = 3;
 
 //console.log(numeroSecreto);
 
@@ -26,6 +27,11 @@ function verificarIntento() {
         }
         intentos++;
         limpiarCaja();
+
+        if (intentos>maximosIntentos) {
+            asignarTextoElemento('p',`Llegaste al número máximo de ${maximosIntentos} intentos`);
+            document.getElementById('reiniciar').removeAttribute('disabled');
+        }
     }
     return;
 }
