@@ -2,7 +2,7 @@ let numeroSecreto = 0;
 let intentos = 0;
 let listaNumerosSorteados = [];
 let numeroMaximo = 10;
-let maximosIntentos = 3;
+let limiteIntentos = 3;
 
 //console.log(numeroSecreto);
 
@@ -20,18 +20,18 @@ function verificarIntento() {
         document.getElementById('reiniciar').removeAttribute('disabled');
     } else {
         // El usuario no acertó.
-        if (numeroDeUsuario > numeroSecreto) {
-            asignarTextoElemento('p','El número secreto es menor');
+        if (intentos >= limiteIntentos) {
+            asignarTextoElemento('p',`Llegaste al número máximo de ${limiteIntentos} intentos`);
+            document.getElementById('reiniciar').removeAttribute('disabled');
         } else {
-            asignarTextoElemento('p','El número secreto es mayor');
+            if (numeroDeUsuario > numeroSecreto) {
+                asignarTextoElemento('p','El número secreto es menor');
+            } else {
+                asignarTextoElemento('p','El número secreto es mayor');
+            }
         }
         intentos++;
         limpiarCaja();
-
-        if (intentos>maximosIntentos) {
-            asignarTextoElemento('p',`Llegaste al número máximo de ${maximosIntentos} intentos`);
-            document.getElementById('reiniciar').removeAttribute('disabled');
-        }
     }
     return;
 }
@@ -78,7 +78,6 @@ function reiniciarJuego() {
     condicionesIniciales();
     //Deshabilitar el botón de nuevo juego
     document.querySelector('#reiniciar').setAttribute('disabled','true');
-    
 }
 
 condicionesIniciales();
